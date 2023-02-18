@@ -1,15 +1,17 @@
 package com.kodilla.sudoku.validation;
 
-import com.kodilla.sudoku.validation.dto.UserValidationDto;
-
 public final class UserValidator {
 
-    public static UserValidationDto validateUserInput(String userEntry) {
+    public UserEntry validateUserInput(String userEntry) {
         return switch(userEntry) {
-            case "new" -> new UserValidationDto(true, false, true, false);
-            case "end" -> new UserValidationDto(true, false, false, true);
-            case "sudoku" -> new UserValidationDto(true, true, false, false);
-            default ->  new UserValidationDto(false, false, false, false);
+            case "new" -> UserEntry.NEW;
+            case "end" -> UserEntry.END;
+            case "sudoku" -> UserEntry.START;
+            default ->  UserEntry.WRONG_INPUT;
         };
+    }
+
+    public boolean isValid(UserEntry userEntry) {
+        return userEntry != UserEntry.WRONG_INPUT;
     }
 }
