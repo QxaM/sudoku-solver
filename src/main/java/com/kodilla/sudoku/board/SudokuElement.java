@@ -35,5 +35,6 @@ public final class SudokuElement extends Prototype<SudokuElement> {
 
     public void setValue(int value) {
         this.value = value;
+        this.possibleValues.clear();
     }
 }

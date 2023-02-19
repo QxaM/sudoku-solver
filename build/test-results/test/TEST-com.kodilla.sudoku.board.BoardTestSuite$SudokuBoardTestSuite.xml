@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kodilla.sudoku.board.BoardTestSuite$SudokuBoardTestSuite" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-19T18:24:22" hostname="DESKTOP-INEM7HQ" time="0.018">
+  <properties/>
+  <testcase name="testAddElement()" classname="com.kodilla.sudoku.board.BoardTestSuite$SudokuBoardTestSuite" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

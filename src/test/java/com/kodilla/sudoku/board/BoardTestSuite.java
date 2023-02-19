@@ -49,10 +49,37 @@ public class BoardTestSuite {
             assertEquals(4, copiedElement.getValue());
             assertEquals(7, copiedElement.getPossibleValues().size());
         }
+
+        @Test
+        void testSetValue() {
+            //Given
+            SudokuElement sudokuElement = new SudokuElement();
+
+            //When
+            sudokuElement.setValue(5);
+
+            //Then
+            assertAll(() -> assertEquals(5, sudokuElement.getValue()),
+                    () -> assertEquals(0, sudokuElement.getPossibleValues().size()));
+        }
     }
 
     @Nested
     public class SudokuRowTestSuite {
+
+        @Test
+        void testAddElement() {
+            //Given
+            SudokuRow sudokuRow = new SudokuRow();
+
+            //When
+            sudokuRow.addElement(5, 6);
+            SudokuElement changedElement = sudokuRow.getSudokuElements().get(5);
+
+            //Then
+            assertAll(() -> assertEquals(6, changedElement.getValue()),
+                    () -> assertEquals(0, changedElement.getPossibleValues().size()));
+        }
 
         @Test
         void testDeepCopy() {
@@ -92,6 +119,22 @@ public class BoardTestSuite {
 
     @Nested
     public class SudokuBoardTestSuite {
+
+        @Test
+        void testAddElement() {
+            //Given
+            SudokuBoard sudokuBoard = new SudokuBoard();
+
+            //When
+            SudokuMove sudokuMove = new SudokuMove(5, 6, 7);
+            sudokuBoard.addElement(sudokuMove);
+            SudokuElement changedElement = sudokuBoard.getSudokuRows().get(5)
+                                                        .getSudokuElements().get(6);
+
+            //Then
+            assertAll(() -> assertEquals(7, changedElement.getValue()),
+                    () -> assertEquals(0, changedElement.getPossibleValues().size()));
+        }
 
         @Test
         void testDeepCopy() {

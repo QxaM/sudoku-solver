@@ -15,6 +15,10 @@ public final class SudokuRow extends Prototype<SudokuRow> {
         }
     }
 
+    public void addElement(int position, int value) {
+        sudokuElements.get(position).setValue(value);
+    }
+
     public SudokuRow deepCopy() throws CloneNotSupportedException {
         SudokuRow copiedRow = super.clone();
         copiedRow.sudokuElements = new ArrayList<>();
