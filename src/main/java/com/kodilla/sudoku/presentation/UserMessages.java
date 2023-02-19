@@ -18,4 +18,8 @@ public final class UserMessages {
     public static void enterElementBelow() {
         System.out.println("Enter element below: ");
     }
+
+    public static void wrongInputMessage() {
+        System.out.println("Wou have entered wrong input!");
+    }
 }

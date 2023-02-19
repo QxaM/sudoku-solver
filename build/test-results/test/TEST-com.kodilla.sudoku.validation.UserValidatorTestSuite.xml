@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.kodilla.sudoku.validation.UserValidatorTestSuite" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-02-18T13:37:30" hostname="DESKTOP-INEM7HQ" time="0.025">
-  <properties/>
-  <testcase name="testValidateUserInput()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.021"/>
-  <testcase name="testIsValid()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

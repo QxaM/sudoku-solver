@@ -4,5 +4,6 @@ public enum UserEntry {
     END,
     NEW,
     START,
-    WRONG_INPUT
+    WRONG_INPUT,
+    ELEMENT_INPUT
 }

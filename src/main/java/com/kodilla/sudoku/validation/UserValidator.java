@@ -2,16 +2,52 @@ package com.kodilla.sudoku.validation;
 
 public final class UserValidator {
 
-    public UserEntry validateUserInput(String userEntry) {
-        return switch(userEntry) {
-            case "new" -> UserEntry.NEW;
-            case "end" -> UserEntry.END;
-            case "sudoku" -> UserEntry.START;
-            default ->  UserEntry.WRONG_INPUT;
-        };
+    private UserEntry userEntry;
+    private String element = "0,0,-1";
+
+    public boolean validateUserInput(String userEntry) {
+        switch(userEntry) {
+            case "new" -> this.userEntry = UserEntry.NEW;
+            case "end" -> this.userEntry = UserEntry.END;
+            case "sudoku" -> this.userEntry = UserEntry.START;
+            default -> {
+                if(userEntry.matches("[1-9],[1-9],[1-9]")){
+                    this.userEntry = UserEntry.ELEMENT_INPUT;
+                    this.element = userEntry;
+                } else {
+                    this.userEntry = UserEntry.WRONG_INPUT;
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
-    public boolean isValid(UserEntry userEntry) {
-        return userEntry != UserEntry.WRONG_INPUT;
+    public boolean isValid() {
+        return this.userEntry != UserEntry.WRONG_INPUT;
+    }
+
+    public boolean isNew() {
+        return this.userEntry == UserEntry.NEW;
+    }
+
+    public boolean isEnd() {
+        return this.userEntry == UserEntry.END;
+    }
+
+    public boolean isStart() {
+        return this.userEntry == UserEntry.START;
+    }
+
+    public boolean isElementInput() {
+        return this.userEntry == UserEntry.ELEMENT_INPUT;
+    }
+
+    public UserEntry getUserEntry() {
+        return userEntry;
+    }
+
+    public String getElement() {
+        return element;
     }
 }
