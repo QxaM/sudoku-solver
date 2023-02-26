@@ -25,6 +25,11 @@ public final class SudokuElement extends Prototype<SudokuElement> {
         return clonedElement;
     }
 
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
+
     public int getValue() {
         return value;
     }

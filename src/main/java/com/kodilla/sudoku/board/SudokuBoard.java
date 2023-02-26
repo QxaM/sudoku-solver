@@ -17,7 +17,7 @@ public final class SudokuBoard extends Prototype<SudokuBoard> {
 
     public void addElement(SudokuMove sudokuMove) {
         sudokuRows.get(sudokuMove.getRow())
-                    .addElement(sudokuMove.getColum(), sudokuMove.getValue());
+                    .addElement(sudokuMove.getColumn(), sudokuMove.getValue());
     }
 
     public SudokuBoard deepCopy() throws CloneNotSupportedException {

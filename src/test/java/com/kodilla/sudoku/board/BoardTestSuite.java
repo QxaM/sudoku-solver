@@ -31,7 +31,9 @@ public class BoardTestSuite {
             //Given
             SudokuElement sudokuElement = new SudokuElement();
             sudokuElement.setValue(5);
-            sudokuElement.removePossibleValue(7);
+
+            SudokuElement sudokuElement1 = new SudokuElement();
+            sudokuElement1.removePossibleValue(7);
 
             //When
             SudokuElement copiedElement = null;
@@ -41,13 +43,20 @@ public class BoardTestSuite {
                 //
             }
             copiedElement.setValue(4);
-            copiedElement.removePossibleValue(8);
+
+            SudokuElement copiedElement1 = null;
+            try{
+                copiedElement1 = sudokuElement1.deepCopy();
+            } catch (CloneNotSupportedException e) {
+                //
+            }
+            copiedElement1.removePossibleValue(4);
 
             //Then
             assertEquals(5, sudokuElement.getValue());
-            assertEquals(8, sudokuElement.getPossibleValues().size());
+            assertEquals(8, sudokuElement1.getPossibleValues().size());
             assertEquals(4, copiedElement.getValue());
-            assertEquals(7, copiedElement.getPossibleValues().size());
+            assertEquals(7, copiedElement1.getPossibleValues().size());
         }
 
         @Test

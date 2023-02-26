@@ -2,13 +2,13 @@ package com.kodilla.sudoku.board;
 
 public final class SudokuMove {
 
+    private final int column;
     private final int row;
-    private final int colum;
     private final int value;
 
-    public SudokuMove(int row, int colum, int value) {
+    public SudokuMove(int column, int row, int value) {
         this.row = row;
-        this.colum = colum;
+        this.column = column;
         this.value = value;
     }
 
@@ -16,8 +16,8 @@ public final class SudokuMove {
         return row;
     }
 
-    public int getColum() {
-        return colum;
+    public int getColumn() {
+        return column;
     }
 
     public int getValue() {
