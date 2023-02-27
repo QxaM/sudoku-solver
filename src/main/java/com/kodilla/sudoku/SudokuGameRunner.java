@@ -33,7 +33,7 @@ public class SudokuGameRunner {
 
             switch(userValidator.getUserEntry()) {
                 case END -> isEnd = true;
-                case START -> sudokuSolver.solveSudoku();
+                case START -> sudokuSolver.solveSudoku(sudokuBoard);
                 case ELEMENT_INPUT -> {
                     SudokuMove sudokuMove = UserInputConverter.toSudokuMove(userValidator.getElement());
                     sudokuBoard.addElement(sudokuMove);

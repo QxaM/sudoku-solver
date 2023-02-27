@@ -2,7 +2,7 @@ package com.kodilla.sudoku.board;
 
 import java.util.StringJoiner;
 
-public class BoardPrinter {
+public final class BoardPrinter {
 
     public static void printBoard(SudokuBoard sudokuBoard) {
         for(SudokuRow row: sudokuBoard.getSudokuRows()) {

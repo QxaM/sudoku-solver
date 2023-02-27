@@ -20,6 +20,10 @@ public final class SudokuBoard extends Prototype<SudokuBoard> {
                     .addElement(sudokuMove.getColumn(), sudokuMove.getValue());
     }
 
+    public SudokuElement getElement(int row, int column) {
+        return sudokuRows.get(row).getSudokuElements().get(column);
+    }
+
     public SudokuBoard deepCopy() throws CloneNotSupportedException {
         SudokuBoard copiedBoard = super.clone();
         copiedBoard.sudokuRows = new ArrayList<>();

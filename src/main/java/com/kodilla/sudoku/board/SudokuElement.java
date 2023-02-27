@@ -4,6 +4,7 @@ import com.kodilla.sudoku.prototype.Prototype;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public final class SudokuElement extends Prototype<SudokuElement> {
@@ -34,8 +35,8 @@ public final class SudokuElement extends Prototype<SudokuElement> {
         return value;
     }
 
-    public Set<Integer> getPossibleValues() {
-        return possibleValues;
+    public List<Integer> getPossibleValues() {
+        return possibleValues.stream().toList();
     }
 
     public void setValue(int value) {

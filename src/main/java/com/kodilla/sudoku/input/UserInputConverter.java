@@ -5,7 +5,7 @@ import com.kodilla.sudoku.board.SudokuMove;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserInputConverter {
+public final class UserInputConverter {
 
     public static SudokuMove toSudokuMove(String userInput) {
         String[] userInputs = userInput.split(",");
