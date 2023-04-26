@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kodilla.sudoku.validation.UserValidatorTestSuite" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-04-26T17:17:24" hostname="DESKTOP-INEM7HQ" time="0.01">
+  <properties/>
+  <testcase name="testIsEnd()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.002"/>
+  <testcase name="testIsNew()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.0"/>
+  <testcase name="testValidateUserInput()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.004"/>
+  <testcase name="testIsStart()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.001"/>
+  <testcase name="testIsValid()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.001"/>
+  <testcase name="testIsElementInput()" classname="com.kodilla.sudoku.validation.UserValidatorTestSuite" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

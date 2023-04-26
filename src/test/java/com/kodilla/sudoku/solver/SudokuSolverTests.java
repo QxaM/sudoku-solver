@@ -15,7 +15,7 @@ public class SudokuSolverTests {
         //Given
 
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.addElement(new SudokuMove(2, 3, 5));
+        sudokuBoard.addElement(new SudokuMove(3, 2, 5));
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
 
         //When
@@ -30,7 +30,7 @@ public class SudokuSolverTests {
     void testAnaliseRows() {
         //Given
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.addElement(new SudokuMove(2, 3, 5));
+        sudokuBoard.addElement(new SudokuMove(3, 2, 5));
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
 
         //When
@@ -45,7 +45,7 @@ public class SudokuSolverTests {
     void testAnaliseSection() {
         //Given
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.addElement(new SudokuMove(2, 3, 5));
+        sudokuBoard.addElement(new SudokuMove(3, 2, 5));
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
 
         //When
@@ -61,38 +61,40 @@ public class SudokuSolverTests {
     void testSudokuFill() {
         //Given
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.addElement(new SudokuMove(1, 0, 5));
-        sudokuBoard.addElement(new SudokuMove(2, 0, 4));
-        sudokuBoard.addElement(new SudokuMove(4, 1, 3));
-        sudokuBoard.addElement(new SudokuMove(8, 1, 9));
-        sudokuBoard.addElement(new SudokuMove(4, 2, 7));
-        sudokuBoard.addElement(new SudokuMove(7, 2, 2));
-        sudokuBoard.addElement(new SudokuMove(8, 2, 1));
-        sudokuBoard.addElement(new SudokuMove(4, 3, 8));
-        sudokuBoard.addElement(new SudokuMove(5, 3, 2));
-        sudokuBoard.addElement(new SudokuMove(0, 4, 7));
-        sudokuBoard.addElement(new SudokuMove(6, 4, 9));
-        sudokuBoard.addElement(new SudokuMove(7, 4, 5));
-        sudokuBoard.addElement(new SudokuMove(0, 5, 3));
-        sudokuBoard.addElement(new SudokuMove(7, 5, 6));
-        sudokuBoard.addElement(new SudokuMove(1, 6, 3));
-        sudokuBoard.addElement(new SudokuMove(3, 6, 4));
-        sudokuBoard.addElement(new SudokuMove(4, 6, 2));
-        sudokuBoard.addElement(new SudokuMove(1, 7, 4));
-        sudokuBoard.addElement(new SudokuMove(2, 7, 9));
-        sudokuBoard.addElement(new SudokuMove(3, 7, 1));
-        sudokuBoard.addElement(new SudokuMove(3, 8, 6));
-        sudokuBoard.addElement(new SudokuMove(6, 8, 8));
+        sudokuBoard.addElement(new SudokuMove(0, 1, 5));
+        sudokuBoard.addElement(new SudokuMove(0, 2, 4));
+        sudokuBoard.addElement(new SudokuMove(1, 4, 3));
+        sudokuBoard.addElement(new SudokuMove(1, 8, 9));
+        sudokuBoard.addElement(new SudokuMove(2, 4, 7));
+        sudokuBoard.addElement(new SudokuMove(2, 7, 2));
+        sudokuBoard.addElement(new SudokuMove(2, 8, 1));
+        sudokuBoard.addElement(new SudokuMove(3, 4, 8));
+        sudokuBoard.addElement(new SudokuMove(3, 5, 2));
+        sudokuBoard.addElement(new SudokuMove(4, 0, 7));
+        sudokuBoard.addElement(new SudokuMove(4, 6, 9));
+        sudokuBoard.addElement(new SudokuMove(4, 7, 5));
+        sudokuBoard.addElement(new SudokuMove(5, 0, 3));
+        sudokuBoard.addElement(new SudokuMove(5, 7, 6));
+        sudokuBoard.addElement(new SudokuMove(6, 1, 3));
+        sudokuBoard.addElement(new SudokuMove(6, 3, 4));
+        sudokuBoard.addElement(new SudokuMove(6, 5, 2));
+        sudokuBoard.addElement(new SudokuMove(7, 1, 4));
+        sudokuBoard.addElement(new SudokuMove(7, 2, 9));
+        sudokuBoard.addElement(new SudokuMove(7, 3, 1));
+        sudokuBoard.addElement(new SudokuMove(8, 3, 6));
+        sudokuBoard.addElement(new SudokuMove(8, 6, 8));
         sudokuBoard.addElement(new SudokuMove(8, 8, 3));
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
 
         //When
         BoardPrinter.printBoard(sudokuBoard);
-        sudokuSolver.sudokuFill();
+        try{
+            sudokuSolver.sudokuFill();
+        }catch (NoMoreMovesException e) {}
 
         //Then
         assertEquals(3, sudokuBoard.getElement(4, 3).getValue());
-        assertEquals(5, sudokuBoard.getElement(7, 4).getValue());
+        assertEquals(5, sudokuBoard.getElement(4, 7).getValue());
         assertEquals(7, sudokuBoard.getElement(8, 5).getValue());
     }
 
@@ -100,40 +102,42 @@ public class SudokuSolverTests {
     void testSolveSudokuUntilBacktrack() {
         //Given
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.addElement(new SudokuMove(1, 0, 5));
-        sudokuBoard.addElement(new SudokuMove(2, 0, 4));
-        sudokuBoard.addElement(new SudokuMove(4, 1, 3));
-        sudokuBoard.addElement(new SudokuMove(8, 1, 9));
-        sudokuBoard.addElement(new SudokuMove(4, 2, 7));
-        sudokuBoard.addElement(new SudokuMove(7, 2, 2));
-        sudokuBoard.addElement(new SudokuMove(8, 2, 1));
-        sudokuBoard.addElement(new SudokuMove(4, 3, 8));
-        sudokuBoard.addElement(new SudokuMove(5, 3, 2));
-        sudokuBoard.addElement(new SudokuMove(0, 4, 7));
-        sudokuBoard.addElement(new SudokuMove(6, 4, 9));
-        sudokuBoard.addElement(new SudokuMove(7, 4, 5));
-        sudokuBoard.addElement(new SudokuMove(0, 5, 3));
-        sudokuBoard.addElement(new SudokuMove(7, 5, 6));
-        sudokuBoard.addElement(new SudokuMove(1, 6, 3));
-        sudokuBoard.addElement(new SudokuMove(3, 6, 4));
-        sudokuBoard.addElement(new SudokuMove(4, 6, 2));
-        sudokuBoard.addElement(new SudokuMove(1, 7, 4));
-        sudokuBoard.addElement(new SudokuMove(2, 7, 9));
-        sudokuBoard.addElement(new SudokuMove(3, 7, 1));
-        sudokuBoard.addElement(new SudokuMove(3, 8, 6));
-        sudokuBoard.addElement(new SudokuMove(6, 8, 8));
+        sudokuBoard.addElement(new SudokuMove(0, 1, 5));
+        sudokuBoard.addElement(new SudokuMove(0, 2, 4));
+        sudokuBoard.addElement(new SudokuMove(1, 4, 3));
+        sudokuBoard.addElement(new SudokuMove(1, 8, 9));
+        sudokuBoard.addElement(new SudokuMove(2, 4, 7));
+        sudokuBoard.addElement(new SudokuMove(2, 7, 2));
+        sudokuBoard.addElement(new SudokuMove(2, 8, 1));
+        sudokuBoard.addElement(new SudokuMove(3, 4, 8));
+        sudokuBoard.addElement(new SudokuMove(3, 5, 2));
+        sudokuBoard.addElement(new SudokuMove(4, 0, 7));
+        sudokuBoard.addElement(new SudokuMove(4, 6, 9));
+        sudokuBoard.addElement(new SudokuMove(4, 7, 5));
+        sudokuBoard.addElement(new SudokuMove(5, 0, 3));
+        sudokuBoard.addElement(new SudokuMove(5, 7, 6));
+        sudokuBoard.addElement(new SudokuMove(6, 1, 3));
+        sudokuBoard.addElement(new SudokuMove(6, 3, 4));
+        sudokuBoard.addElement(new SudokuMove(6, 5, 2));
+        sudokuBoard.addElement(new SudokuMove(7, 1, 4));
+        sudokuBoard.addElement(new SudokuMove(7, 2, 9));
+        sudokuBoard.addElement(new SudokuMove(7, 3, 1));
+        sudokuBoard.addElement(new SudokuMove(8, 3, 6));
+        sudokuBoard.addElement(new SudokuMove(8, 6, 8));
         sudokuBoard.addElement(new SudokuMove(8, 8, 3));
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
 
         //When
         BoardPrinter.printBoard(sudokuBoard);
-        sudokuSolver.solveSudoku();
+        try{
+            sudokuSolver.solveSudoku();
+        }catch (NoMoreMovesException e){}
 
         //Then
-        assertEquals(2, sudokuBoard.getElement(6, 4).getValue());
+        assertEquals(5, sudokuBoard.getElement(7, 4).getValue());
         assertEquals(9, sudokuBoard.getElement(8, 4).getValue());
-        assertEquals(8, sudokuBoard.getElement(6, 5).getValue());
-        assertEquals(3, sudokuBoard.getElement(7, 5).getValue());
+        assertEquals(7, sudokuBoard.getElement(7, 7).getValue());
+        assertEquals(3, sudokuBoard.getElement(4, 3).getValue());
     }
 
     @Test
@@ -157,34 +161,36 @@ public class SudokuSolverTests {
     void testGuessValue() {
         //Given
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.addElement(new SudokuMove(1, 0, 5));
-        sudokuBoard.addElement(new SudokuMove(2, 0, 4));
-        sudokuBoard.addElement(new SudokuMove(4, 1, 3));
-        sudokuBoard.addElement(new SudokuMove(8, 1, 9));
-        sudokuBoard.addElement(new SudokuMove(4, 2, 7));
-        sudokuBoard.addElement(new SudokuMove(7, 2, 2));
-        sudokuBoard.addElement(new SudokuMove(8, 2, 1));
-        sudokuBoard.addElement(new SudokuMove(4, 3, 8));
-        sudokuBoard.addElement(new SudokuMove(5, 3, 2));
-        sudokuBoard.addElement(new SudokuMove(0, 4, 7));
-        sudokuBoard.addElement(new SudokuMove(6, 4, 9));
-        sudokuBoard.addElement(new SudokuMove(7, 4, 5));
-        sudokuBoard.addElement(new SudokuMove(0, 5, 3));
-        sudokuBoard.addElement(new SudokuMove(7, 5, 6));
-        sudokuBoard.addElement(new SudokuMove(1, 6, 3));
-        sudokuBoard.addElement(new SudokuMove(3, 6, 4));
-        sudokuBoard.addElement(new SudokuMove(4, 6, 2));
-        sudokuBoard.addElement(new SudokuMove(1, 7, 4));
-        sudokuBoard.addElement(new SudokuMove(2, 7, 9));
-        sudokuBoard.addElement(new SudokuMove(3, 7, 1));
-        sudokuBoard.addElement(new SudokuMove(3, 8, 6));
-        sudokuBoard.addElement(new SudokuMove(6, 8, 8));
+        sudokuBoard.addElement(new SudokuMove(0, 1, 5));
+        sudokuBoard.addElement(new SudokuMove(0, 2, 4));
+        sudokuBoard.addElement(new SudokuMove(1, 4, 3));
+        sudokuBoard.addElement(new SudokuMove(1, 8, 9));
+        sudokuBoard.addElement(new SudokuMove(2, 4, 7));
+        sudokuBoard.addElement(new SudokuMove(2, 7, 2));
+        sudokuBoard.addElement(new SudokuMove(2, 8, 1));
+        sudokuBoard.addElement(new SudokuMove(3, 4, 8));
+        sudokuBoard.addElement(new SudokuMove(3, 5, 2));
+        sudokuBoard.addElement(new SudokuMove(4, 0, 7));
+        sudokuBoard.addElement(new SudokuMove(4, 6, 9));
+        sudokuBoard.addElement(new SudokuMove(4, 7, 5));
+        sudokuBoard.addElement(new SudokuMove(5, 0, 3));
+        sudokuBoard.addElement(new SudokuMove(5, 7, 6));
+        sudokuBoard.addElement(new SudokuMove(6, 1, 3));
+        sudokuBoard.addElement(new SudokuMove(6, 3, 4));
+        sudokuBoard.addElement(new SudokuMove(6, 5, 2));
+        sudokuBoard.addElement(new SudokuMove(7, 1, 4));
+        sudokuBoard.addElement(new SudokuMove(7, 2, 9));
+        sudokuBoard.addElement(new SudokuMove(7, 3, 1));
+        sudokuBoard.addElement(new SudokuMove(8, 3, 6));
+        sudokuBoard.addElement(new SudokuMove(8, 6, 8));
         sudokuBoard.addElement(new SudokuMove(8, 8, 3));
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
 
         //When
         BoardPrinter.printBoard(sudokuBoard);
-        sudokuSolver.solveSudoku();
+        try{
+            sudokuSolver.solveSudoku();
+        }catch (NoMoreMovesException e){}
 
         //Then
         assertNotEquals(-1, sudokuBoard.getElement(0, 0).getValue());

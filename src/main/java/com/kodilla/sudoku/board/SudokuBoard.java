@@ -16,8 +16,8 @@ public final class SudokuBoard extends Prototype<SudokuBoard> {
     }
 
     public void addElement(SudokuMove sudokuMove) {
-        sudokuRows.get(sudokuMove.getRow())
-                    .addElement(sudokuMove.getColumn(), sudokuMove.getValue());
+        sudokuRows.get(sudokuMove.row())
+                    .addElement(sudokuMove.column(), sudokuMove.value());
     }
 
     public SudokuElement getElement(int row, int column) {

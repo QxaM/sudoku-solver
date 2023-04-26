@@ -6,13 +6,12 @@ public final class BoardPrinter {
 
     public static void printBoard(SudokuBoard sudokuBoard) {
         for(SudokuRow row: sudokuBoard.getSudokuRows()) {
-            StringJoiner stringJoiner = new StringJoiner("|");
+            StringJoiner stringJoiner = new StringJoiner("|", "|", "|");
             for(SudokuElement element: row.getSudokuElements()) {
-                String elementToAdd = "";
+                String elementToAdd = " ";
                 if(element.getValue() > 0) {
-                    elementToAdd += " ";
+                    elementToAdd = element.toString();
                 }
-                elementToAdd += element;
                 stringJoiner.add(elementToAdd);
             }
             System.out.println(stringJoiner);

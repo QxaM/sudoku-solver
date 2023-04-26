@@ -6,6 +6,7 @@ import com.kodilla.sudoku.board.SudokuMove;
 import com.kodilla.sudoku.input.UserInput;
 import com.kodilla.sudoku.input.UserInputConverter;
 import com.kodilla.sudoku.presentation.UserMessages;
+import com.kodilla.sudoku.solver.NoMoreMovesException;
 import com.kodilla.sudoku.solver.SudokuSolver;
 import com.kodilla.sudoku.validation.UserValidator;
 
@@ -34,14 +35,19 @@ public class SudokuGameRunner {
                 case END -> isEnd = true;
                 case START -> {
                     SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
-                    sudokuSolver.solveSudoku();
+                    try {
+                        isEnd = sudokuSolver.solveSudoku();
+                    } catch (NoMoreMovesException e) {
+                        UserMessages.wrongSudoku();
+                        isEnd = true;
+                    }
                 }
                 case ELEMENT_INPUT -> {
                     SudokuMove sudokuMove = UserInputConverter.toSudokuMove(userValidator.getElement());
                     sudokuBoard.addElement(sudokuMove);
+                    BoardPrinter.printBoard(sudokuBoard);
                 }
             }
-            BoardPrinter.printBoard(sudokuBoard);
         } while (!isEnd);
 
         userInput.cleanUp();

@@ -17,7 +17,7 @@ public final class SudokuSolver {
         this.sudokuBoard = sudokuBoard;
     }
 
-    public boolean solveSudoku() {
+    public boolean solveSudoku() throws NoMoreMovesException{
         boolean isSolved = false;
         do{
             boolean wasFilled;
@@ -33,7 +33,7 @@ public final class SudokuSolver {
         return true;
     }
 
-    public boolean sudokuFill() {
+    public boolean sudokuFill() throws NoMoreMovesException {
         boolean elementSet = false;
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
@@ -110,7 +110,7 @@ public final class SudokuSolver {
             for(int j=0; j<9; j++) {
                 if(sudokuBoard.getElement(i, j).getValue() == -1) {
                     int value = sudokuBoard.getElement(i, j).getPossibleValues().get(0);
-                    SudokuMove nextMove = new SudokuMove(j, i, value);
+                    SudokuMove nextMove = new SudokuMove(i, j, value);
                     try {
                         backtrack.getPreviousBoards().push(sudokuBoard.deepCopy());
                         backtrack.setPreviousMove(nextMove);
@@ -123,11 +123,14 @@ public final class SudokuSolver {
         }
     }
 
-    public SudokuBoard stepBack() {
+    public SudokuBoard stepBack() throws NoMoreMovesException {
+        if(backtrack.getPreviousBoards().isEmpty()) {
+            throw new NoMoreMovesException();
+        }
         SudokuBoard previousBoard = backtrack.getPreviousBoards().pop();
-        int row = backtrack.getPreviousMove().getRow();
-        int column = backtrack.getPreviousMove().getColumn();
-        int value = backtrack.getPreviousMove().getValue();
+        int row = backtrack.getPreviousMove().row();
+        int column = backtrack.getPreviousMove().column();
+        int value = backtrack.getPreviousMove().value();
         previousBoard.getElement(row, column).removePossibleValue(value);
         return previousBoard;
     }

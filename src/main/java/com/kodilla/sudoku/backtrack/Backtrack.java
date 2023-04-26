@@ -1,11 +1,9 @@
 package com.kodilla.sudoku.backtrack;
 
 import com.kodilla.sudoku.board.SudokuBoard;
-import com.kodilla.sudoku.board.SudokuElement;
 import com.kodilla.sudoku.board.SudokuMove;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
 
 public final class Backtrack {
 

@@ -22,4 +22,8 @@ public final class UserMessages {
     public static void wrongInputMessage() {
         System.out.println("Wou have entered wrong input!");
     }
+
+    public static void wrongSudoku() {
+        System.out.println("Run out of moves - sudoku without solutions entered");
+    }
 }

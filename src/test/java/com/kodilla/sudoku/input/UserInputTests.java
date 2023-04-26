@@ -21,9 +21,9 @@ public class UserInputTests {
             SudokuMove sudokuMove = UserInputConverter.toSudokuMove(inputElement);
 
             //Then
-            assertAll(() -> assertEquals(1, sudokuMove.getColumn()),
-                    () -> assertEquals(2, sudokuMove.getRow()),
-                    () -> assertEquals(4, sudokuMove.getValue()));
+            assertAll(() -> assertEquals(1, sudokuMove.column()),
+                    () -> assertEquals(2, sudokuMove.row()),
+                    () -> assertEquals(4, sudokuMove.value()));
         }
     }
 }

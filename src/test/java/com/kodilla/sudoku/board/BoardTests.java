@@ -135,7 +135,7 @@ public class BoardTests {
             SudokuBoard sudokuBoard = new SudokuBoard();
 
             //When
-            SudokuMove sudokuMove = new SudokuMove(6, 5, 7);
+            SudokuMove sudokuMove = new SudokuMove(5, 6, 7);
             sudokuBoard.addElement(sudokuMove);
             SudokuElement changedElement = sudokuBoard.getSudokuRows().get(5)
                                                         .getSudokuElements().get(6);

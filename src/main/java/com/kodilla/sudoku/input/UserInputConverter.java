@@ -12,6 +12,6 @@ public final class UserInputConverter {
         List<Integer> integerInputs = Arrays.stream(userInputs)
                                             .mapToInt(Integer::parseInt)
                                             .boxed().toList();
-        return new SudokuMove((integerInputs.get(0)-1), (integerInputs.get(1)-1), integerInputs.get(2));
+        return new SudokuMove((integerInputs.get(1)-1), (integerInputs.get(0)-1), integerInputs.get(2));
     }
 }
