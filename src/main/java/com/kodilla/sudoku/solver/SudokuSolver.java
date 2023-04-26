@@ -105,17 +105,23 @@ public final class SudokuSolver {
                 .noneMatch(value -> value == -1);
     }
 
-    public void guessValue() {
+    public void guessValue() throws NoMoreMovesException {
         for(int i=0; i<9; i++) {
             for(int j=0; j<9; j++) {
                 if(sudokuBoard.getElement(i, j).getValue() == -1) {
+                    if (sudokuBoard.getElement(i, j).getPossibleValues().size() == 0) {
+                        throw new NoMoreMovesException();
+                    }
+
                     int value = sudokuBoard.getElement(i, j).getPossibleValues().get(0);
                     SudokuMove nextMove = new SudokuMove(i, j, value);
+
                     try {
                         backtrack.getPreviousBoards().push(sudokuBoard.deepCopy());
                         backtrack.setPreviousMove(nextMove);
                     }catch (CloneNotSupportedException e) {}
                     sudokuBoard.getElement(i, j).setValue(value);
+
                     BoardPrinter.printBoard(sudokuBoard);
                     return;
                 }
