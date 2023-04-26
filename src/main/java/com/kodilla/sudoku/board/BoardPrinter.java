@@ -17,5 +17,6 @@ public final class BoardPrinter {
             }
             System.out.println(stringJoiner);
         }
+        System.out.println("---------------------------");
     }
 }
