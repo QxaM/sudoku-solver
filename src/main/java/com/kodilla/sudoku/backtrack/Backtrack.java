@@ -9,10 +9,10 @@ import java.util.Queue;
 
 public final class Backtrack {
 
-    private final Queue<SudokuBoard> previousBoards = new ArrayDeque<>();
+    private final ArrayDeque<SudokuBoard> previousBoards = new ArrayDeque<>();
     private SudokuMove previousMove;
 
-    public Queue<SudokuBoard> getPreviousBoards() {
+    public ArrayDeque<SudokuBoard> getPreviousBoards() {
         return previousBoards;
     }
 

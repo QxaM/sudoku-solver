@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BoardTestSuite {
+public class BoardTests {
 
     @Nested
     public class SudokuElementTestSuite {
@@ -135,7 +135,7 @@ public class BoardTestSuite {
             SudokuBoard sudokuBoard = new SudokuBoard();
 
             //When
-            SudokuMove sudokuMove = new SudokuMove(5, 6, 7);
+            SudokuMove sudokuMove = new SudokuMove(6, 5, 7);
             sudokuBoard.addElement(sudokuMove);
             SudokuElement changedElement = sudokuBoard.getSudokuRows().get(5)
                                                         .getSudokuElements().get(6);

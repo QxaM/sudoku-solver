@@ -4,30 +4,49 @@ import com.kodilla.sudoku.backtrack.Backtrack;
 import com.kodilla.sudoku.board.BoardPrinter;
 import com.kodilla.sudoku.board.SudokuBoard;
 import com.kodilla.sudoku.board.SudokuElement;
+import com.kodilla.sudoku.board.SudokuMove;
 
 import java.util.stream.IntStream;
 
 public final class SudokuSolver {
 
+    private SudokuBoard sudokuBoard;
     private final Backtrack backtrack = new Backtrack();
 
-    public boolean solveSudoku(SudokuBoard sudokuBoard) {
-        boolean wasFilled;
-        do{
-            wasFilled = sudokuFill(sudokuBoard);
-        }while (wasFilled);
-        return false;
+    public SudokuSolver(SudokuBoard sudokuBoard) {
+        this.sudokuBoard = sudokuBoard;
     }
 
-    public boolean sudokuFill(SudokuBoard sudokuBoard) {
+    public boolean solveSudoku() {
+        boolean isSolved = false;
+        do{
+            boolean wasFilled;
+            do{
+                wasFilled = sudokuFill();
+            }while(wasFilled);
+            if (isSolved()) {
+                isSolved = true;
+            } else {
+                guessValue();
+            }
+        }while(!isSolved);
+        return true;
+    }
+
+    public boolean sudokuFill() {
         boolean elementSet = false;
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
                 SudokuElement elementToAnalise = sudokuBoard.getElement(i, j);
                 if (elementToAnalise.getValue() == -1) {
-                    analiseRow(sudokuBoard, elementToAnalise, i);
-                    analiseColumn(sudokuBoard, elementToAnalise, j);
-                    analiseSection(sudokuBoard, elementToAnalise, i, j);
+                    if(elementToAnalise.getPossibleValues().size() == 0) {
+                        sudokuBoard = stepBack();
+                        return true;
+                    }
+
+                    analiseRow(elementToAnalise, i);
+                    analiseColumn(elementToAnalise, j);
+                    analiseSection(elementToAnalise, i, j);
 
                     if(elementToAnalise.getPossibleValues().size() == 1) {
                         elementToAnalise.setValue(elementToAnalise.getPossibleValues().get(0));
@@ -40,21 +59,21 @@ public final class SudokuSolver {
         return elementSet;
     }
 
-    public void analiseColumn(SudokuBoard sudokuBoard, SudokuElement sudokuElement, int column) {
+    public void analiseColumn(SudokuElement sudokuElement, int column) {
         IntStream.range(0,9)
                 .map(i -> sudokuBoard.getElement(i, column).getValue())
                 .filter(i -> i != -1)
                 .forEach(sudokuElement::removePossibleValue);
     }
 
-    public void analiseRow(SudokuBoard sudokuBoard, SudokuElement sudokuElement, int row) {
+    public void analiseRow(SudokuElement sudokuElement, int row) {
         IntStream.range(0,9)
                 .map(i -> sudokuBoard.getElement(row, i).getValue())
                 .filter(i -> i != -1)
                 .forEach(sudokuElement::removePossibleValue);
     }
 
-    public void analiseSection(SudokuBoard sudokuBoard, SudokuElement sudokuElement, int row, int column) {
+    public void analiseSection(SudokuElement sudokuElement, int row, int column) {
         int rowSection = row / 3;
         int columnSection = column / 3;
 
@@ -77,5 +96,39 @@ public final class SudokuSolver {
                 }
             }
         }
+    }
+
+    public boolean isSolved() {
+        return sudokuBoard.getSudokuRows().stream()
+                .flatMap(sudokuRow -> sudokuRow.getSudokuElements().stream())
+                .map(SudokuElement::getValue)
+                .noneMatch(value -> value == -1);
+    }
+
+    public void guessValue() {
+        for(int i=0; i<9; i++) {
+            for(int j=0; j<9; j++) {
+                if(sudokuBoard.getElement(i, j).getValue() == -1) {
+                    int value = sudokuBoard.getElement(i, j).getPossibleValues().get(0);
+                    SudokuMove nextMove = new SudokuMove(j, i, value);
+                    try {
+                        backtrack.getPreviousBoards().push(sudokuBoard.deepCopy());
+                        backtrack.setPreviousMove(nextMove);
+                    }catch (CloneNotSupportedException e) {}
+                    sudokuBoard.getElement(i, j).setValue(value);
+                    BoardPrinter.printBoard(sudokuBoard);
+                    return;
+                }
+            }
+        }
+    }
+
+    public SudokuBoard stepBack() {
+        SudokuBoard previousBoard = backtrack.getPreviousBoards().pop();
+        int row = backtrack.getPreviousMove().getRow();
+        int column = backtrack.getPreviousMove().getColumn();
+        int value = backtrack.getPreviousMove().getValue();
+        previousBoard.getElement(row, column).removePossibleValue(value);
+        return previousBoard;
     }
 }

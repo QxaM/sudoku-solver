@@ -17,7 +17,6 @@ public class SudokuGameRunner {
         UserValidator userValidator = new UserValidator();
 
         SudokuBoard sudokuBoard = new SudokuBoard();
-        SudokuSolver sudokuSolver = new SudokuSolver();
 
         boolean isEnd = false;
         do {
@@ -33,7 +32,10 @@ public class SudokuGameRunner {
 
             switch(userValidator.getUserEntry()) {
                 case END -> isEnd = true;
-                case START -> sudokuSolver.solveSudoku(sudokuBoard);
+                case START -> {
+                    SudokuSolver sudokuSolver = new SudokuSolver(sudokuBoard);
+                    sudokuSolver.solveSudoku();
+                }
                 case ELEMENT_INPUT -> {
                     SudokuMove sudokuMove = UserInputConverter.toSudokuMove(userValidator.getElement());
                     sudokuBoard.addElement(sudokuMove);
